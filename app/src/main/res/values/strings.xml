@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">BusiCard</string>
     <string name="title_card_detail">Card Detail</string>
+    <string name="card_detail_photo">Photo</string>
+
+    <string name="card_detail_up">Up</string>
 </resources>

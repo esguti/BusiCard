@@ -1,36 +1,129 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.esguti.busicard.ui.DrawInsetsFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:fitsSystemWindows="true"
-    tools:context="com.esguti.busicard.cardDetailActivity" tools:ignore="MergeRootFrame">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout android:id="@+id/app_bar"
-        android:layout_width="match_parent" android:layout_height="@dimen/app_bar_height"
-        android:fitsSystemWindows="true"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
-        <android.support.design.widget.CollapsingToolbarLayout android:id="@+id/toolbar_layout"
-            android:layout_width="match_parent" android:layout_height="match_parent"
-            android:fitsSystemWindows="true" app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed" app:toolbarId="@+id/toolbar">
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/card_detail_appbar"
+            app:elevation="@dimen/card_detail_appbar_elevation"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            android:windowTranslucentStatus="true"
+            android:fitsSystemWindows="true">
 
-            <android.support.v7.widget.Toolbar android:id="@+id/detail_toolbar"
-                android:layout_width="match_parent" android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/card_detail_collapsing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_collapseMode="parallax"
+                app:collapsedTitleTextAppearance="@style/TextAppearance.AppCompat.Large"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
-        </android.support.design.widget.CollapsingToolbarLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/card_detail_photo_placeholder"
+                    android:fitsSystemWindows="true">
+                    <!--suppress AndroidLintContentDescription -->
 
-    </android.support.design.widget.AppBarLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/example_card_view"/>
 
-    <android.support.v4.widget.NestedScrollView android:id="@+id/card_detail_container"
-        android:layout_width="match_parent" android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                </FrameLayout>
 
-    <android.support.design.widget.FloatingActionButton android:id="@+id/fab"
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|start" android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/stat_notify_chat"
-        app:layout_anchor="@+id/card_detail_container" app:layout_anchorGravity="top|end" />
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/card_detail_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:elevation="@dimen/card_detail_fragment_toolbar_elevation"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    android:fitsSystemWindows="true"/>
 
-</android.support.design.widget.CoordinatorLayout>
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <com.esguti.busicard.ui.MaxWidthLinearLayout
+                android:id="@+id/card_detail_container"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:maxWidth="@dimen/card_detail_card_max_width"
+                android:background="@android:color/white"
+                android:elevation="2dp"
+                android:paddingTop="@dimen/fab_margin">
+
+                <EditText
+                    android:id="@+id/card_detail_first_name"
+                    style="@style/card_detail_info"
+                    android:text="First Name"/>
+
+                <EditText
+                    android:id="@+id/card_detail_last_name"
+                    style="@style/card_detail_info"
+                    android:text="Last Name"/>
+
+                <EditText
+                    android:id="@+id/card_detail_company_name"
+                    style="@style/card_detail_info"
+                    android:text="Company Name"/>
+
+                <EditText
+                    android:id="@+id/card_detail_telephone"
+                    style="@style/card_detail_info"
+                    android:text="Telephone"/>
+
+                <EditText
+                    android:id="@+id/card_detail_email"
+                    style="@style/card_detail_info"
+                    android:text="Email"/>
+
+            </com.esguti.busicard.ui.MaxWidthLinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/card_detail_fab_share"
+            style="@style/AppTheme"
+            android:elevation="@dimen/elevation_low"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@android:drawable/ic_menu_share"
+            app:layout_anchor="@+id/card_detail_appbar"
+            app:layout_anchorGravity="top|end" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/card_detail_fab_scan"
+            style="@style/AppTheme"
+            android:elevation="@dimen/elevation_low"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/scan"
+            app:layout_anchor="@+id/card_detail_appbar"
+            app:layout_anchorGravity="bottom|end"/>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</com.esguti.busicard.ui.DrawInsetsFrameLayout>

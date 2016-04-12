@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 /**
  * An activity representing a single card detail screen. This
@@ -23,11 +24,19 @@ public class cardDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.card_detail_toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab_share = (FloatingActionButton) findViewById(R.id.card_detail_fab_share);
+        fab_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+        FloatingActionButton fab_scan = (FloatingActionButton) findViewById(R.id.card_detail_fab_scan);
+        fab_scan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
@@ -53,6 +62,8 @@ public class cardDetailActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
+            setContentView(R.layout.activity_card_detail);
+
             Bundle arguments = new Bundle();
             arguments.putString(cardDetailFragment.ARG_ITEM_ID,
                     getIntent().getStringExtra(cardDetailFragment.ARG_ITEM_ID));
@@ -61,6 +72,7 @@ public class cardDetailActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.card_detail_container, fragment)
                     .commit();
+
         }
     }
 

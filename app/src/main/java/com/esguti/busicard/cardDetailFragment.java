@@ -47,10 +47,13 @@ public class cardDetailFragment extends Fragment {
             mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
 
             Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.card_detail_collapsing_toolbar);
             if (appBarLayout != null) {
                 appBarLayout.setTitle(mItem.content);
             }
+
+//            TextView txt_article_body = (TextView) activity.findViewById(R.id.card_detail_first_name);
+//            txt_article_body.setText("card body");
         }
     }
 
@@ -61,7 +64,7 @@ public class cardDetailFragment extends Fragment {
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.card_detail)).setText(mItem.details);
+            //((TextView) rootView.findViewById(R.id.card_detail_article_byline)).setText(mItem.details);
         }
 
         return rootView;
