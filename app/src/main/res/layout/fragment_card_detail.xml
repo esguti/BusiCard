@@ -30,14 +30,21 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/card_detail_photo_placeholder"
+                    android:background="@color/colorPrimary"
                     android:fitsSystemWindows="true">
                     <!--suppress AndroidLintContentDescription -->
 
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@drawable/example_card_view"/>
+                    <!--<FrameLayout-->
+                        <!--android:background="@color/colorPrimary"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_gravity="center_horizontal|bottom" />-->
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/card_detail_photo"
+                            android:src="@drawable/example_card_view"/>
 
                 </FrameLayout>
 
@@ -68,33 +75,43 @@
                 android:layout_gravity="center_horizontal"
                 android:maxWidth="@dimen/card_detail_card_max_width"
                 android:background="@android:color/white"
-                android:elevation="2dp"
+                android:elevation="@dimen/elevation_low"
                 android:paddingTop="@dimen/fab_margin">
 
                 <EditText
-                    android:id="@+id/card_detail_first_name"
+                    android:id="@+id/card_detail_name"
                     style="@style/card_detail_info"
-                    android:text="First Name"/>
-
-                <EditText
-                    android:id="@+id/card_detail_last_name"
-                    style="@style/card_detail_info"
-                    android:text="Last Name"/>
+                    android:hint="@string/card_detail_hint_name"
+                    android:drawableLeft="@drawable/ic_account_circle_black_24dp"
+                    android:drawablePadding="3dp"/>
 
                 <EditText
                     android:id="@+id/card_detail_company_name"
                     style="@style/card_detail_info"
-                    android:text="Company Name"/>
+                    android:hint="@string/card_detail_hint_company_name"
+                    android:drawableLeft="@drawable/ic_domain_black_24dp"
+                    android:drawablePadding="3dp"/>
 
                 <EditText
                     android:id="@+id/card_detail_telephone"
                     style="@style/card_detail_info"
-                    android:text="Telephone"/>
+                    android:hint="@string/card_detail_hint_telephone"
+                    android:drawableLeft="@drawable/ic_call_black_24dp"
+                    android:drawablePadding="3dp"/>
 
                 <EditText
                     android:id="@+id/card_detail_email"
                     style="@style/card_detail_info"
-                    android:text="Email"/>
+                    android:hint="@string/card_detail_hint_email"
+                    android:drawableLeft="@drawable/ic_mail_black_24dp"
+                    android:drawablePadding="3dp"/>
+
+                <EditText
+                    android:id="@+id/card_detail_location"
+                    style="@style/card_detail_info"
+                    android:hint="@string/card_detail_hint_location"
+                    android:drawableLeft="@drawable/ic_location_on_black_24dp"
+                    android:drawablePadding="3dp"/>
 
             </com.esguti.busicard.ui.MaxWidthLinearLayout>
 
@@ -109,9 +126,10 @@
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
             android:layout_margin="@dimen/fab_margin"
-            android:src="@android:drawable/ic_menu_share"
+            android:src="@drawable/ic_share_black_24dp"
             app:layout_anchor="@+id/card_detail_appbar"
-            app:layout_anchorGravity="top|end" />
+            app:layout_anchorGravity="top|end"
+            android:hint="@string/card_detail_hint_share"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/card_detail_fab_scan"
@@ -120,9 +138,23 @@
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:layout_gravity="center_vertical|start"
             android:layout_margin="@dimen/fab_margin"
-            android:src="@drawable/scan"
+            android:src="@drawable/ic_scanner_black_24dp"
             app:layout_anchor="@+id/card_detail_appbar"
-            app:layout_anchorGravity="bottom|end"/>
+            app:layout_anchorGravity="bottom|end"
+            android:hint="@string/card_detail_hint_scan"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/card_detail_fab_photo"
+            style="@style/AppTheme"
+            android:elevation="@dimen/elevation_low"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/ic_camera_alt_black_24dp"
+            app:layout_anchor="@+id/card_detail_appbar"
+            app:layout_anchorGravity="bottom|start"
+            android:hint="@string/card_detail_hint_photo"/>
+
 
     </android.support.design.widget.CoordinatorLayout>
 

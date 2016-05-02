@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file:///media/EST_500GB/Cloud/Dropbox/Private/CursoAndroid/src/CapstoneProject/BusiCard/BusiCard.iml" filepath="/media/EST_500GB/Cloud/Dropbox/Private/CursoAndroid/src/CapstoneProject/BusiCard/BusiCard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BusiCard.iml" filepath="$PROJECT_DIR$/BusiCard.iml" />
       <module fileurl="file:///media/EST_500GB/Cloud/Dropbox/Private/CursoAndroid/src/CapstoneProject/BusiCard/app/app.iml" filepath="/media/EST_500GB/Cloud/Dropbox/Private/CursoAndroid/src/CapstoneProject/BusiCard/app/app.iml" />
     </modules>
   </component>

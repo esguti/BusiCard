@@ -11,5 +11,7 @@
     <dimen name="card_detail_metabar_title_bottom_padding">4dp</dimen>
     <dimen name="card_detail_fragment_toolbar_elevation">2dp</dimen>
     <dimen name="card_detail_card_max_width">10000dp</dimen>
-    <dimen name="card_detail_body_bottom_margin">88dp</dimen>
+    <dimen name="card_detail_body_bottom_margin">20dp</dimen>
+    <dimen name="card_detail_img_name">43dp</dimen>
+    <dimen name="cardview_default_margin">4dp</dimen>
 </resources>

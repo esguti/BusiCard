@@ -7,17 +7,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.esguti.busicard.dummy.DummyContent;
 
 /**
  * A fragment representing a single card detail screen.
- * This fragment is either contained in a {@link cardListActivity}
- * in two-pane mode (on tablets) or a {@link cardDetailActivity}
+ * This fragment is either contained in a {@link CardListActivity}
+ * in two-pane mode (on tablets) or a {@link CardDetailActivity}
  * on handsets.
  */
-public class cardDetailFragment extends Fragment {
+public class CardDetailFragment extends Fragment {
+    private static final String LOG_TAG = CardDetailFragment.class.getSimpleName();
+
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
@@ -33,7 +34,7 @@ public class cardDetailFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public cardDetailFragment() {
+    public CardDetailFragment() {
     }
 
     @Override
@@ -60,12 +61,7 @@ public class cardDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.card_detail, container, false);
-
-        // Show the dummy content as text in a TextView.
-        if (mItem != null) {
-            //((TextView) rootView.findViewById(R.id.card_detail_article_byline)).setText(mItem.details);
-        }
+        View rootView = inflater.inflate(R.layout.fragment_card_detail, container, false);
 
         return rootView;
     }

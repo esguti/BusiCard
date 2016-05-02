@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.esguti.busicard"
-        minSdkVersion 10
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -26,4 +26,7 @@ dependencies {
     compile 'com.android.support:support-v4:23.2.1'
     compile 'com.android.support:recyclerview-v7:23.2.1'
     compile 'com.android.support:design:23.2.1'
+    compile 'com.google.zxing:core:3.2.0'
+    compile 'com.google.zxing:android-integration:3.2.0'
+    compile 'com.googlecode.ez-vcard:ez-vcard:0.9.9'
 }
