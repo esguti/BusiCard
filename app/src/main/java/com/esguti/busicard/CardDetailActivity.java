@@ -1,6 +1,8 @@
 package com.esguti.busicard;
 
 import android.content.ContentValues;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -10,6 +12,7 @@ import android.provider.MediaStore;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NavUtils;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -52,8 +55,6 @@ public class CardDetailActivity extends AppCompatActivity {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private String m_photoPath = null;
-
-    private CardListActivity m_CardListActivity = null;
 
     private CardsDatabase m_CardsDatabase;
     private long m_CardId = -1;
@@ -169,7 +170,32 @@ public class CardDetailActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        if( m_CardId == -1) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            String message = getString(R.string.card_detail_back_msg);
+            String message_yes = getString(R.string.card_list_delete_msg_yes);
+            String message_no = getString(R.string.card_list_delete_msg_no);
+            builder
+                    .setMessage(message)
+                    .setPositiveButton(message_yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            goBack();
+                        }
+                    })
+                    .setNegativeButton(message_no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    })
+                    .show();
+        }else{
+            super.onBackPressed();
+        }
+    }
+
+    private void goBack(){
         Intent intent = new Intent(this, CardListActivity.class);
         startActivity(intent);
         finish();

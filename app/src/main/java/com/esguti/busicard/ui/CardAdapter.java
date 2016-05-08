@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -88,11 +89,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         m_Cursor.moveToPosition(position);
 
-        holder.titleView.setText(m_Cursor.getString(CardLoader.Query.NAME));
-        holder.subtitleView.setText(
-                m_Cursor.getString(CardLoader.Query.COMPANY)
-                        + m_Cursor.getString(CardLoader.Query.EMAIL));
-        holder.thumbnailView.setImageBitmap(CardsDatabase.getCardThumbnail(m_Cursor));
+        String name = m_Cursor.getString(CardLoader.Query.NAME);
+        String company = m_Cursor.getString(CardLoader.Query.COMPANY);
+        Bitmap thumbnail = CardsDatabase.getCardThumbnail(m_Cursor);
+        String email = m_Cursor.getString(CardLoader.Query.EMAIL);
+        holder.thumbnailView.setImageBitmap(thumbnail);
+        holder.titleView.setText(name);
+        holder.subtitleView.setText(company);
+        holder.subtitle2View.setText(email);
     }
 
     @Override
@@ -113,12 +117,14 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         public ImageView thumbnailView;
         public TextView titleView;
         public TextView subtitleView;
+        public TextView subtitle2View;
 
         public ViewHolder(View view) {
             super(view);
             thumbnailView = (ImageView) view.findViewById(R.id.card_list_content_thumb);
             titleView = (TextView) view.findViewById(R.id.card_list_content_name);
             subtitleView = (TextView) view.findViewById(R.id.card_list_content_company);
+            subtitle2View = (TextView) view.findViewById(R.id.card_list_content_email);
         }
     }
 

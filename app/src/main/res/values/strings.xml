@@ -16,4 +16,5 @@
     <string name="card_list_delete_msg">Delete the card?</string>
     <string name="card_list_delete_msg_yes">Yes</string>
     <string name="card_list_delete_msg_no">No</string>
+    <string name="card_detail_back_msg">Discard Card? (Take a photo for saving)</string>
 </resources>
