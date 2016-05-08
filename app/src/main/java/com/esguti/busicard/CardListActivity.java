@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
@@ -11,11 +12,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
 
 import com.esguti.busicard.data.CardLoader;
+import com.esguti.busicard.data.CardsContract;
+import com.esguti.busicard.data.CardsDatabase;
 import com.esguti.busicard.ui.CardAdapter;
 import com.esguti.busicard.ui.CardListListener;
 
@@ -38,6 +42,7 @@ public class CardListActivity extends AppCompatActivity implements
     private RecyclerView m_RecyclerView;
     private CardAdapter m_Adapter;
     private Context m_Context;
+    private CardDetailFragment m_CardDetailFragment = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +73,12 @@ public class CardListActivity extends AppCompatActivity implements
             // If this view is present, then the
             // activity should be in two-pane mode.
             m_TwoPane = true;
+            CoordinatorLayout.LayoutParams params =
+                    new CoordinatorLayout.LayoutParams(
+                            CoordinatorLayout.LayoutParams.WRAP_CONTENT,
+                            CoordinatorLayout.LayoutParams.WRAP_CONTENT);
+            params.gravity = Gravity.LEFT;
+            fab.setLayoutParams(params);
         }
 
         //getSupportLoaderManager().initLoader(0, null, this);
@@ -80,13 +91,7 @@ public class CardListActivity extends AppCompatActivity implements
                 .show();
         
         if (m_TwoPane) {
-            //Bundle arguments = new Bundle();
-            //arguments.putString(CardDetailFragment.ARG_ITEM_ID, holder.mItem.id);
-            CardDetailFragment fragment = new CardDetailFragment();
-            //fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.card_detail_container, fragment)
-                    .commit();
+            setCardFragment(-1);
         } else {
             Intent intent = new Intent(m_Context, CardDetailActivity.class);
             //intent.putExtra(CardDetailFragment.ARG_ITEM_ID, holder.mItem.id);
@@ -111,5 +116,39 @@ public class CardListActivity extends AppCompatActivity implements
     @Override
     public void updateList() {
         getSupportLoaderManager().restartLoader(1, null, this);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if( m_TwoPane && m_CardDetailFragment != null)
+            m_CardDetailFragment.onActionResult(requestCode, resultCode, data);
+    }
+
+    public void changeCard(long cardId){
+        if( m_TwoPane ){
+            setCardFragment(cardId);
+        }else {
+            m_Context.startActivity(new Intent(Intent.ACTION_VIEW,
+                    CardsContract.Cards.buildCardUri(cardId)));
+        }
+    }
+
+    @Override
+    public CardsDatabase getDatabase() {
+        return new CardsDatabase(this);
+    }
+
+    private void setCardFragment(long cardId){
+        m_CardDetailFragment = new CardDetailFragment();
+        m_CardDetailFragment.setListener(this,this);
+
+        Bundle arguments = new Bundle();
+        arguments.putLong(CardDetailFragment.ARG_CARD_ID, cardId);
+        m_CardDetailFragment.setArguments(arguments);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.card_detail_container, m_CardDetailFragment)
+                .commit();
     }
 }

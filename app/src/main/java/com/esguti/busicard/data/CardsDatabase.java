@@ -105,40 +105,36 @@ public class CardsDatabase extends SQLiteOpenHelper {
         String picturePath = cardFilePath.toString();
         String thumbnailPath = cardThumbFilePath.toString();
 
-        FileOutputStream fosp = null;
-        FileOutputStream fost = null;
         try {
-            fosp = new FileOutputStream(cardFilePath);
-            fost = new FileOutputStream(thumbnailPath);
+            FileOutputStream fosp = new FileOutputStream(cardFilePath);
+            FileOutputStream fost = new FileOutputStream(thumbnailPath);
             Bitmap picture = ImageTools.decodeSampledBitmapFromFile(photoPath, IMG_SIZE_WIDTH, IMG_SIZE_HEIGHT);
             Bitmap thumbnail = ImageTools.decodeSampledBitmapFromFile(photoPath, THM_SIZE_WIDTH, THM_SIZE_HEIGHT);
             picture.compress(Bitmap.CompressFormat.PNG, 100 /*quality*/, fosp);
             thumbnail.compress(Bitmap.CompressFormat.PNG, 100 /*quality*/, fost);
             fosp.close();
             fost.close();
+
+            // Updates the database entry for the card to point to the picture
+            SQLiteDatabase db = getWritableDatabase();
+
+            ContentValues newPictureValue = new ContentValues();
+            newPictureValue.put(CardsContract.CardsColumns.PHOTO_URL, picturePath);
+            db.update(Tables.CARDS,
+                    newPictureValue,
+                    CardsContract.CardsColumns._ID + "=?",
+                    new String[]{String.valueOf(cardId)});
+
+            ContentValues newThumbnailValue = new ContentValues();
+            newThumbnailValue.put(CardsContract.CardsColumns.THM_URL, thumbnailPath);
+            db.update(Tables.CARDS,
+                    newThumbnailValue,
+                    CardsContract.CardsColumns._ID + "=?",
+                    new String[]{String.valueOf(cardId)});
         }
         catch (Exception ex) {
             Log.w(LOG_TAG, "Problem updating picture", ex);
-            picturePath = "";
-            thumbnailPath = "";
         }
-
-        // Updates the database entry for the card to point to the picture
-        SQLiteDatabase db = getWritableDatabase();
-
-        ContentValues newPictureValue = new ContentValues();
-        newPictureValue.put(CardsContract.CardsColumns.PHOTO_URL, picturePath);
-        db.update(Tables.CARDS,
-                newPictureValue,
-                CardsContract.CardsColumns._ID + "=?",
-                new String[]{String.valueOf(cardId)});
-
-        ContentValues newThumbnailValue = new ContentValues();
-        newThumbnailValue.put(CardsContract.CardsColumns.THM_URL, thumbnailPath);
-        db.update(Tables.CARDS,
-                newThumbnailValue,
-                CardsContract.CardsColumns._ID + "=?",
-                new String[]{String.valueOf(cardId)});
     }
 
 

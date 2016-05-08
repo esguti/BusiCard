@@ -47,8 +47,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                m_Context.startActivity(new Intent(Intent.ACTION_VIEW,
-                        CardsContract.Cards.buildCardUri(getItemId(vh.getAdapterPosition()))));
+                m_listener.changeCard(getItemId(vh.getAdapterPosition()));
             }
         });
         view.setOnLongClickListener(new View.OnLongClickListener(){
