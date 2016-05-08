@@ -31,12 +31,15 @@ android {
 
 ext {
     supportLibVersion = '23.2.1'  // variable that can be referenced to keep support libs consistent
+    gserv = '8.1.0'
 }
 
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+    compile "com.google.android.gms:play-services:${gserv}"
+    compile "com.google.android.gms:play-services-analytics:${gserv}"
     compile "com.android.support:appcompat-v7:${supportLibVersion}"
     compile "com.android.support:support-v4:${supportLibVersion}"
     compile "com.android.support:recyclerview-v7:${supportLibVersion}"
@@ -46,3 +49,5 @@ dependencies {
     compile 'com.google.zxing:android-integration:3.2.0'
     compile 'com.googlecode.ez-vcard:ez-vcard:0.9.9'
 }
+
+apply plugin: 'com.google.gms.google-services'

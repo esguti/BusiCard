@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "234356308474",
+    "project_id": "busicard-51e0b"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234356308474:android:6faeb9fd73b4d742",
+        "android_client_info": {
+          "package_name": "com.esguti.busicard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfLLtewyNkhWXnfJUVvXxPOYvtuh4zPYQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-77453288-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
