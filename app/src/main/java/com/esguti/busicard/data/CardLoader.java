@@ -28,15 +28,18 @@ public class CardLoader extends CursorLoader {
                 CardsContract.Cards.EMAIL,
                 CardsContract.Cards.TELEPHONE,
                 CardsContract.Cards.ADDRESS,
-                CardsContract.Cards.PHOTO_URL
+                CardsContract.Cards.PHOTO_URL,
+                CardsContract.Cards.THM_URL
         };
 
         int _ID = 0;
-        int COMAPANY = 1;
-        int NAME = 2;
-        int EMAIL = 3;
-        int TELPHONE = 4;
-        int ADDRESS = 5;
-        int PHOTO_URL = 6;
+        int COMPANY = _ID+1;
+        int NAME = COMPANY+1;
+        int EMAIL = NAME+1;
+        int TELEPHONE = EMAIL+1;
+        int ADDRESS = TELEPHONE+1;
+        int PHOTO_URL = ADDRESS+1;
+        int THM_URL = PHOTO_URL +1;
+        int CARD_COLUMNS_NUMBER = THM_URL + 1;
     }
 }

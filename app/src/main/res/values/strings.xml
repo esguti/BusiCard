@@ -13,4 +13,7 @@
     <string name="card_detail_hint_share">Share contact</string>
     <string name="card_detail_hint_scan">Scan card photo</string>
     <string name="card_detail_hint_photo">Take a photo</string>
+    <string name="card_list_delete_msg">Delete the card?</string>
+    <string name="card_list_delete_msg_yes">Yes</string>
+    <string name="card_list_delete_msg_no">No</string>
 </resources>

@@ -34,17 +34,11 @@
                     android:fitsSystemWindows="true">
                     <!--suppress AndroidLintContentDescription -->
 
-                    <!--<FrameLayout-->
-                        <!--android:background="@color/colorPrimary"-->
-                        <!--android:layout_width="match_parent"-->
-                        <!--android:layout_height="match_parent"-->
-                        <!--android:layout_gravity="center_horizontal|bottom" />-->
-
-                        <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:id="@+id/card_detail_photo"
-                            android:src="@drawable/example_card_view"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/card_detail_photo"
+                        android:src="@drawable/example_card_view"/>
 
                 </FrameLayout>
 

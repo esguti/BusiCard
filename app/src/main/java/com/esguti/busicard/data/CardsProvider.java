@@ -20,20 +20,19 @@ import java.util.List;
 public class CardsProvider extends ContentProvider {
     private SQLiteOpenHelper mOpenHelper;
 
-    interface Tables {
+    public interface Tables {
         String CARDS = "cards";
     }
 
     private static final int ITEMS = 0;
-    private static final int ITEMS__ID = 1;
+    private static final int ITEMS_ID = 1;
 
     private static final UriMatcher sUriMatcher = buildUriMatcher();
 
     private static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
-        final String authority = CardsContract.CONTENT_AUTHORITY;
-        matcher.addURI(authority, "items", ITEMS);
-        matcher.addURI(authority, "items/#", ITEMS__ID);
+        matcher.addURI(CardsContract.CONTENT_AUTHORITY, Tables.CARDS, ITEMS);
+        matcher.addURI(CardsContract.CONTENT_AUTHORITY, Tables.CARDS + "/#", ITEMS_ID);
         return matcher;
     }
 
@@ -49,7 +48,7 @@ public class CardsProvider extends ContentProvider {
         switch (match) {
             case ITEMS:
                 return CardsContract.Cards.CONTENT_TYPE;
-            case ITEMS__ID:
+            case ITEMS_ID:
                 return CardsContract.Cards.CONTENT_CARD_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
@@ -108,16 +107,13 @@ public class CardsProvider extends ContentProvider {
     private SelectionBuilder buildSelection(Uri uri, int match, SelectionBuilder builder) {
         final List<String> paths = uri.getPathSegments();
         switch (match) {
-            case ITEMS: {
+            case ITEMS:
                 return builder.table(Tables.CARDS);
-            }
-            case ITEMS__ID: {
+            case ITEMS_ID:
                 final String _id = paths.get(1);
                 return builder.table(Tables.CARDS).where(CardsContract.Cards._ID + "=?", _id);
-            }
-            default: {
+            default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
-            }
         }
     }
 
