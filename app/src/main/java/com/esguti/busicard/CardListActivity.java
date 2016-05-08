@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.esguti.busicard.data.CardLoader;
 import com.esguti.busicard.ui.CardAdapter;
-import com.esguti.busicard.ui.Listener;
+import com.esguti.busicard.ui.CardListListener;
 
 /**
  * An activity representing a list of cards. This activity
@@ -28,7 +28,7 @@ import com.esguti.busicard.ui.Listener;
  * item details side-by-side using two vertical panes.
  */
 public class CardListActivity extends AppCompatActivity implements
-        LoaderManager.LoaderCallbacks<Cursor>, Listener {
+        LoaderManager.LoaderCallbacks<Cursor>, CardListListener {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -88,11 +88,9 @@ public class CardListActivity extends AppCompatActivity implements
                     .replace(R.id.card_detail_container, fragment)
                     .commit();
         } else {
-            Context context = m_Context;
-            Intent intent = new Intent(context, CardDetailActivity.class);
+            Intent intent = new Intent(m_Context, CardDetailActivity.class);
             //intent.putExtra(CardDetailFragment.ARG_ITEM_ID, holder.mItem.id);
-
-            context.startActivity(intent);
+            startActivity(intent);
         }
     }
 
@@ -112,8 +110,6 @@ public class CardListActivity extends AppCompatActivity implements
 
     @Override
     public void updateList() {
-        m_Adapter = new CardAdapter(this);
-        m_RecyclerView.setAdapter(m_Adapter);
-        m_RecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        getSupportLoaderManager().restartLoader(1, null, this);
     }
 }

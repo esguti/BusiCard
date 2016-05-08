@@ -47,9 +47,13 @@ import ezvcard.property.Telephone;
  */
 public class CardDetailActivity extends AppCompatActivity {
     private static final String LOG_TAG = CardDetailActivity.class.getSimpleName();
+
     CollapsingToolbarLayout m_appBarLayout = null;
+
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private String m_photoPath = null;
+
+    private CardListActivity m_CardListActivity = null;
 
     private CardsDatabase m_CardsDatabase;
     private long m_CardId = -1;
@@ -161,6 +165,14 @@ public class CardDetailActivity extends AppCompatActivity {
         }
         share.setDataAndType(Uri.fromFile(vcfFile), "text/vcard");
         startActivity(share);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, CardListActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

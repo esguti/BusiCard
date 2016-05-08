@@ -24,11 +24,11 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     private CardsDatabase m_CardsDatabase;
     private Cursor m_Cursor;
     private Context m_Context;
-    private Listener m_listener;
+    private CardListListener m_listener;
 
     public CardAdapter(Context context) {
         m_Context = context;
-        m_listener = (Listener) context;
+        m_listener = (CardListListener) context;
         m_CardsDatabase = new CardsDatabase(m_Context);
     }
 
@@ -87,6 +87,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         m_Cursor.moveToPosition(position);
+
         holder.titleView.setText(m_Cursor.getString(CardLoader.Query.NAME));
         holder.subtitleView.setText(
                 m_Cursor.getString(CardLoader.Query.COMPANY)
