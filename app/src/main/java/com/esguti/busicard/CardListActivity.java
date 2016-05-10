@@ -65,7 +65,6 @@ public class CardListActivity extends AppCompatActivity implements
      */
     protected GoogleApiClient m_GoogleApiClient;
     private AddressResultReceiver m_ResultReceiver;
-    private String m_Country = "Unknown";
     private Tracker m_Tracker = null;
 
     @Override

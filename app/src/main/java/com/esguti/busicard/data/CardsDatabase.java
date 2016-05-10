@@ -54,13 +54,46 @@ public class CardsDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    /**
-     * Gets the text information from the specified card in the database.
-     *
-     * @param cardId the identifier of the card for which to get the picture.
-     *
-     * @return the card information, or an empty string if info is not found.
-     */
+    public Cursor getCardCursor(long cardId) {
+        // Gets the database in the current database helper in read-only mode
+        SQLiteDatabase db = getReadableDatabase();
+
+        // After the query, the cursor points to the first database row
+        // returned by the request
+        Cursor cardCursor = db.query(Tables.CARDS,
+                null,
+                CardsContract.CardsColumns._ID + "=?",
+                new String[]{String.valueOf(cardId)},
+                null,
+                null,
+                null);
+        cardCursor.moveToNext();
+
+        return cardCursor;
+    }
+
+    public Cursor getFirst() {
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.query(Tables.CARDS, new String[]{"*"},
+                null,
+                null, null, null, null, null);
+
+        if (cursor != null) {
+            if (cursor.moveToNext()) { return cursor; }
+        }
+
+        return cursor;
+    }
+
+
+        /**
+         * Gets the text information from the specified card in the database.
+         *
+         * @param cardId the identifier of the card for which to get the picture.
+         *
+         * @return the card information, or an empty string if info is not found.
+         */
     public String[] getCardText(long cardId) {
         String[] output = new String[CardLoader.Query.CARD_COLUMNS_NUMBER];
 
@@ -90,7 +123,26 @@ public class CardsDatabase extends SQLiteOpenHelper {
         return output;
     }
 
-        /**
+    public String[] getCardText(Cursor cardCursor) {
+        String[] output = new String[CardLoader.Query.CARD_COLUMNS_NUMBER];
+
+        if( cardCursor != null ) {
+            output[CardLoader.Query._ID] = cardCursor.getString(cardCursor.getColumnIndex(CardsContract.CardsColumns._ID));
+            output[CardLoader.Query.COMPANY] = cardCursor.getString(cardCursor.getColumnIndex(CardsContract.CardsColumns.COMPANY));
+            output[CardLoader.Query.ADDRESS] = cardCursor.getString(cardCursor.getColumnIndex(CardsContract.CardsColumns.ADDRESS));
+            output[CardLoader.Query.EMAIL] = cardCursor.getString(cardCursor.getColumnIndex(CardsContract.CardsColumns.EMAIL));
+            output[CardLoader.Query.NAME] = cardCursor.getString(cardCursor.getColumnIndex(CardsContract.CardsColumns.NAME));
+            output[CardLoader.Query.TELEPHONE] = cardCursor.getString(cardCursor.getColumnIndex(CardsContract.CardsColumns.TELEPHONE));
+            output[CardLoader.Query.PHOTO_URL] = cardCursor.getString(cardCursor.getColumnIndex(CardsContract.CardsColumns.PHOTO_URL));
+            output[CardLoader.Query.THM_URL] = cardCursor.getString(cardCursor.getColumnIndex(CardsContract.CardsColumns.THM_URL));
+        }
+
+        return output;
+    }
+
+
+
+    /**
          * Updates the current picture for the card.
          *
          * @param cardId the identifier of the card for which to save the picture
@@ -137,6 +189,14 @@ public class CardsDatabase extends SQLiteOpenHelper {
         }
     }
 
+    public int getItemsCount(){
+        String countQuery = "SELECT  * FROM " + Tables.CARDS;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int cnt = cursor.getCount();
+        cursor.close();
+        return cnt;
+    }
 
     public void updateTextField(long cardId, String column_id, String text) {
         SQLiteDatabase db = getWritableDatabase();

@@ -77,6 +77,7 @@ public class CardDetailActivity extends AppCompatActivity implements CardListLis
                     })
                     .show();
         } else {
+            m_CardDetail.updateAllTextFields();
             goBack();
         }
     }

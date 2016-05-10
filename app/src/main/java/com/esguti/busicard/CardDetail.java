@@ -65,6 +65,22 @@ public class CardDetail {
         m_appBarLayout = (CollapsingToolbarLayout) m_view.findViewById(R.id.card_detail_collapsing_toolbar);
     }
 
+    public void updateAllTextFields(){
+        if( m_CardId != CARD_ID_NULL ) {
+            EditText txt_card_detail_company = (EditText) m_view.findViewById(R.id.card_detail_company_name);
+            EditText txt_card_detail_email = (EditText) m_view.findViewById(R.id.card_detail_email);
+            EditText txt_card_detail_location = (EditText) m_view.findViewById(R.id.card_detail_location);
+            EditText txt_card_detail_telephone = (EditText) m_view.findViewById(R.id.card_detail_telephone);
+            EditText txt_card_detail_name = (EditText) m_view.findViewById(R.id.card_detail_name);
+
+            m_CardsDatabase.updateTextField(m_CardId, CardsContract.Cards.COMPANY, txt_card_detail_company.getText().toString());
+            m_CardsDatabase.updateTextField(m_CardId, CardsContract.Cards.EMAIL, txt_card_detail_email.getText().toString());
+            m_CardsDatabase.updateTextField(m_CardId, CardsContract.Cards.ADDRESS, txt_card_detail_location.getText().toString());
+            m_CardsDatabase.updateTextField(m_CardId, CardsContract.Cards.TELEPHONE, txt_card_detail_telephone.getText().toString());
+            m_CardsDatabase.updateTextField(m_CardId, CardsContract.Cards.NAME, txt_card_detail_name.getText().toString());
+        }
+    }
+
     public void addListeners(){
         FloatingActionButton fab_share = (FloatingActionButton) m_view.findViewById(R.id.card_detail_fab_share);
         fab_share.setOnClickListener(new View.OnClickListener() {
