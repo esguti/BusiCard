@@ -7,8 +7,10 @@
     android:name="com.esguti.busicard.cardListFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:layout_marginLeft="@dimen/card_list_frame_margin"
+    android:layout_marginEnd="@dimen/card_list_frame_margin"
+    android:layout_marginRight="@dimen/card_list_frame_margin"
+    android:layout_marginStart="@dimen/card_list_frame_margin"
     app:layoutManager="LinearLayoutManager"
     tools:context=".CardListActivity"
     tools:listitem="@layout/card_list_content" />
